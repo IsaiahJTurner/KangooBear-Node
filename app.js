@@ -5,11 +5,17 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongoURL = " mongodb://kangoobear:password@ds041934.mongolab.com:41934/kangoobear";
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 6969));
 
 app.use(bodyParser.json({
   type: ['application/json', 'application/vnd.api+json']
 }))
+
+app.get("/", function(req, res) {
+  res.json({
+    goodCode: false
+  })
+});
 
 app.get("/patients", function(req, res) {
   Patient.find(function(err, patients) {
@@ -29,4 +35,8 @@ app.post("/patients", function(req, res) {
       patient: patient
     })
   })
+});
+
+app.listen(app.get('port'), function() {
+  console.log('Started!')
 });
