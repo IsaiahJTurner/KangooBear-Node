@@ -9,7 +9,10 @@ var PatientSchema = new Schema({
   scope: {
     type: String
   },
-  tokenType: {
+  name: {
+    type: String
+  },
+  address: {
     type: String
   },
   createdAt: {
