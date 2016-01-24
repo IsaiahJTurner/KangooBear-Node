@@ -52,8 +52,51 @@ ul {
 li {
   background: #F1F1F1;
   margin: 25px 0;
+  border-radius: 5px;
+  padding: 17px 30px;
+}
+li:hover {
+  box-shadow: 0 2px 2px #ddd;
+  cursor: pointer;
+}
+li .full {
+  display: flex;
+  position: relative;
+}
+li .left {
+  display: inline-block;
+  float: left;
+  width: 100%;
+}
+li .right {
+  float: right;
+  border: 1px solid #979797;
+  background: white;
+  position: absolute;
+  height: 103px;
+  min-width: 220px;
+  top: -17px;
+  right: 0px;
+  padding: 12px 55px;
+  font-size: 24px;
+  font-weight: bold;
+}
+li .right img {
+  position: relative;
+  top: 14px;
+  left: -10px;
 }
 li .name {
   font-size: 36px;
   color: #F49100;
+}
+li .location {
+  margin-top: 10px;
+  color: #824B11;
+  padding-left: 20px;
+}
+li .location img {
+  position: absolute;
+  left: 0;
+  margin-top: -3px;
 }

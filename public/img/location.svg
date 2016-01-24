@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="21px" viewBox="0 0 16 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>location</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-132.000000, -383.000000)" fill="#A2A2A2">
+            <g id="All-Locations" sketch:type="MSLayerGroup" transform="translate(127.000000, 335.000000)">
+                <g id="location" transform="translate(5.000000, 48.000000)" sketch:type="MSShapeGroup">
+                    <g id="Group">
+                        <path d="M14.5004589,11.9014723 L7.95917712,20.6126026 L1.41789538,11.9014723 L1.44762848,11.9014723 C0.674567911,10.7399882 0.228571429,9.34620739 0.228571429,7.83627813 C0.228571429,3.65493559 3.67761089,0.286631875 7.95917712,0.286631875 C12.2407433,0.286631875 15.6897828,3.65493559 15.6897828,7.83627813 C15.6897828,9.34620739 15.2437863,10.7399882 14.4707258,11.9014723 L14.5004589,11.9014723 L14.5004589,11.9014723 Z M7.95917712,4.93256803 C6.32385668,4.93256803 4.98586724,6.23923758 4.98586724,7.83627813 C4.98586724,9.43331869 6.32385668,10.7399882 7.95917712,10.7399882 C9.59449755,10.7399882 10.932487,9.43331869 10.932487,7.83627813 C10.932487,6.23923758 9.59449755,4.93256803 7.95917712,4.93256803 L7.95917712,4.93256803 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

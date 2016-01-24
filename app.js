@@ -2,6 +2,9 @@ var express = require('express');
 var Patient = require("./models/Patient");
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
+var Postmates = require('postmates');
+
+var postmates = new Postmates('cus_KeECA-m3J8F6bV', 'b124db3c-d169-47dd-9f55-b62145fdfbb0');
 
 var app = express();
 var mongoURL = "mongodb://kangoobear:password@ds041934.mongolab.com:41934/kangoobear";
@@ -50,6 +53,18 @@ app.get("/api/patients/:patientId", function(req, res) {
   })
 });
 
+app.patch("/api/patients/:patientId", function(req, res) {
+  Patient.update({
+    _id: req.params.patientId
+  }, {
+    dosage: req.body.dosage
+  }, {}, function(err, patients) {
+    res.json({
+      err: err,
+      patients: patients
+    })
+  })
+});
 app.post("/api/patients", function(req, res) {
   Patient.findOneAndUpdate(req.body.modelData, {
     accessToken: req.body.modelData.accessToken
@@ -57,10 +72,20 @@ app.post("/api/patients", function(req, res) {
     upsert: true,
     new: true
   }, function(err, patient) {
-    res.json({
-      err: err,
-      patient: patient
-    })
+    var delivery = {
+      pickup_address: "3401 Civic Center Boulevard, Philadelphia, PA 29104",
+      dropoff_address: patient.address
+    };
+
+    postmates.quote(delivery, function(postmatesErr, postmatesRes) {
+      console.log(res.body.fee); // 799
+      res.json({
+        err: err,
+        patient: patient,
+        postmatesErr: postmatesErr,
+        postmatesRes: postmatesRes
+      })
+    });
   })
 });
 

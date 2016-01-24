@@ -21,26 +21,28 @@
       <div class="table-cell">
         <img src="/img/Logo.png" /><div class="title">Bowerbird</div>
       </div>
-      
     </div>
     <hr />
   </header>
   <div class="main">
     <ul>
     <% for(var i = 0; i < patients.length; i++) { var patient = patients[i]; %>
-      <li>
-        <div class="left">
-          <div class="name"><%= patient.name %></div>
-          <div class="location"><%= patient.address %></div>
-        </div>
-        <div class="right">
-          <% var dosage = patient.dosage || dosage; %>
-          <%= dosage %>
+      <li data-id="<%= patient._id %>">
+        <div class="full">
+          <div class="left">
+            <div class="name"><%= patient.name %></div>
+            <div class="location"><img src="/img/location.svg" /><%= patient.address %></div>
+          </div>
+          <div class="right">
+            <img src="/img/bottle.svg"><span class="value"><% var dosage = patient.dosage || dosage; %>
+            <%= dosage %></span>
+          </div>
         </div>
       </li>
       <% } %>
     </ul>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="/js/scripts.js"></script>
 </body>
 </html>
