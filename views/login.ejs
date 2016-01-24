@@ -24,14 +24,22 @@
     </div>
     <hr />
   </header>
-  <ul>
-    <li>
-      <div class="left">
-        <div class="name">Isaiah Turner</div>
-        <div class="location">800 P St. NW, Washington, DC 20001
-      </div>
-    </li>
-  </ul>
+  <div class="main">
+    <ul>
+    <% for(var i = 0; i < patients.length; i++) { var patient = patients[i]; %>
+      <li>
+        <div class="left">
+          <div class="name"><%= patient.name %></div>
+          <div class="location"><%= patient.address %></div>
+        </div>
+        <div class="right">
+          <% var dosage = patient.dosage || dosage; %>
+          <%= dosage %>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+  </div>
   <script src="/js/scripts.js"></script>
 </body>
 </html>

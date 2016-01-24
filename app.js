@@ -17,7 +17,11 @@ app.use(bodyParser.json({
 app.set('view engine', 'ejs');
 
 app.get("/", function(req, res) {
-  res.render("login");
+  Patient.find(function(err, patients) {
+    res.render("login", {
+      patients: patients
+    });
+  });
 });
 
 app.get("/api", function(req, res) {
@@ -35,9 +39,24 @@ app.get("/api/patients", function(req, res) {
   })
 });
 
+app.get("/api/patients/:patientId", function(req, res) {
+  Patient.findOne({
+    _id: req.params.patientId
+  }, function(err, patients) {
+    res.json({
+      err: err,
+      patients: patients
+    })
+  })
+});
+
 app.post("/api/patients", function(req, res) {
-  var patient = new Patient(req.body.modelData);
-  patient.save(function(err, patient) {
+  Patient.update(req.body.modelData, {
+    accessToken: req.body.modelData.accessToken
+  }, {
+    upsert: true,
+    new: true
+  }, function(err, patient) {
     res.json({
       err: err,
       patient: patient
