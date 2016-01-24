@@ -12,6 +12,9 @@ var PatientSchema = new Schema({
   name: {
     type: String
   },
+  quote: {
+    type: String
+  },
   dosage: {
     type: String,
     default: "100IU"
