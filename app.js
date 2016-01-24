@@ -42,14 +42,58 @@ app.get("/api/patients", function(req, res) {
   })
 });
 
-app.get("/api/patients/:patientId", function(req, res) {
+app.post("/api/patients/:patientId", function(req, res) {
   Patient.findOne({
     _id: req.params.patientId
   }, function(err, patients) {
-    res.json({
-      err: err,
-      patients: patients
-    })
+    var delivery = {
+      manifest: "Insulin",
+      pickup_name: "Pharmacy",
+      pickup_address: "3401 Civic Center Boulevard, Philadelphia, PA 29104",
+      pickup_phone_number: "555-867-5309",
+      dropoff_name: patient.name,
+      dropoff_address: patient.address,
+      dropoff_phone_number: patient.phone,
+      quote_id: patient.quote
+    };
+
+    postmates.new(delivery, function(postmatesErr, postmatesRes) {
+      res.json({
+        err: err,
+        patient: patient,
+        postmatesErr: postmatesErr,
+        postmates: postmatesRes.body
+      })
+    });
+  })
+});
+
+
+app.get("/api/patients/:patientId", function(req, res) {
+  Patient.findOne({
+    _id: req.params.patientId
+  }, function(err, patient) {
+    if (err || !patient) {
+      return res.json({
+        err: err,
+        patient: patient
+      })
+    }
+    var delivery = {
+      pickup_address: "3401 Civic Center Boulevard, Philadelphia, PA 29104",
+      dropoff_address: patient.address
+    };
+
+    postmates.quote(delivery, function(postmatesErr, postmatesRes) {
+      //console.log(res.body.fee); // 799
+      console.log(postmatesRes.body)
+      res.json({
+        err: err,
+        patient: patient,
+        postmatesErr: postmatesErr,
+        postmates: postmatesRes.body
+      })
+    });
   })
 });
 
@@ -65,6 +109,7 @@ app.patch("/api/patients/:patientId", function(req, res) {
     })
   })
 });
+
 app.post("/api/patients", function(req, res) {
   Patient.findOneAndUpdate(req.body.modelData, {
     accessToken: req.body.modelData.accessToken
@@ -72,22 +117,12 @@ app.post("/api/patients", function(req, res) {
     upsert: true,
     new: true
   }, function(err, patient) {
-    var delivery = {
-      pickup_address: "3401 Civic Center Boulevard, Philadelphia, PA 29104",
-      dropoff_address: patient.address
-    };
-
-    postmates.quote(delivery, function(postmatesErr, postmatesRes) {
-      console.log(res.body.fee); // 799
-      res.json({
-        err: err,
-        patient: patient,
-        postmatesErr: postmatesErr,
-        postmatesRes: postmatesRes
-      })
-    });
-  })
-});
+    res.json({
+      err: err,
+      patient: patient
+    })
+  });
+})
 
 app.get("/reset", function(req, res) {
   Patient.remove({}, function(err, updated) {

@@ -1,5 +1,8 @@
 $("li").click(function() {
   var dosage = prompt("What would you like to prescribe?");
+  if (!dosage) {
+    return;
+  }
   $this = $(this);
   $.ajax({
     type: "PATCH",
@@ -12,7 +15,7 @@ $("li").click(function() {
     success: function(data) {
       $this.find(".value").first().html(dosage);
     },
-    failure: function(errMsg) {
+    failure: function(error) {
     }
   });
 });
