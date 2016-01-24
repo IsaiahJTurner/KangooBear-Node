@@ -4,6 +4,7 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: Helvetica;
 }
 header {
   height: 210px;
@@ -21,10 +22,17 @@ header hr {
   padding: 0; 
 }
 .logo {
+  color: #009BE5;
+  font-size: 64px;
 }
 .logo img {
   height: 107px;
-  width: 200px;
+}
+.logo .title {
+  display: inline;
+  bottom: 30px;
+  position: relative;
+  left: 20px;
 }
 .table {
   display: table;
@@ -35,4 +43,17 @@ header hr {
   vertical-align: middle;
   display: table-cell;
   width: 100%
+}
+ul {
+  list-style: none;
+  margin: 0 95px;
+  padding: 0;
+}
+li {
+  background: #F1F1F1;
+  margin: 25px 0;
+}
+li .name {
+  font-size: 36px;
+  color: #F49100;
 }

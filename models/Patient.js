@@ -13,7 +13,8 @@ var PatientSchema = new Schema({
     type: String
   },
   dosage: {
-    type: String
+    type: String,
+    default: "100IU"
   },
   phone: {
     type: String
