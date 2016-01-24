@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var PatientSchema = new Schema({
-  accessToken: {
+  access_token: {
     type: String
   },
   scope: {
