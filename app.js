@@ -5,7 +5,8 @@ var ejs = require('ejs');
 
 var app = express();
 var mongoURL = "mongodb://kangoobear:password@ds041934.mongolab.com:41934/kangoobear";
-
+var mongoose = require('mongoose');
+mongoose.connect(mongoURL);
 app.set('port', (process.env.PORT || 6969));
 app.use(express.static(__dirname + '/public'))
 
