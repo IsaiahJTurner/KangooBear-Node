@@ -46,12 +46,38 @@ app.post("/api/patients/:patientId", function(req, res) {
   Patient.findOne({
     _id: req.params.patientId
   }, function(err, patient) {
-        if (err || !patient) {
+    if (err || !patient) {
       return res.json({
         err: err,
         patient: patient
       })
     }
+    if (!patient.quote) {
+      postmates.quote(delivery, function(postmatesErr, postmatesRes) {
+        patient.quote = postmatesRes.body.id;
+        patient.save(function(saveErr, saveRes) {
+          var delivery = {
+            manifest: "Insulin",
+            pickup_name: "Pharmacy",
+            pickup_address: "3401 Civic Center Boulevard, Philadelphia, PA 29104",
+            pickup_phone_number: "555-867-5309",
+            dropoff_name: patient.name,
+            dropoff_address: patient.address,
+            dropoff_phone_number: patient.phone,
+            quote_id: patient.quote
+          };
+          postmates.new(delivery, function(postmatesErr, postmatesRes) {
+            res.json({
+              err: err,
+              patient: patient,
+              postmatesErr: postmatesErr,
+              postmates: postmatesRes.body
+            })
+          });
+        })
+      })
+    }
+
     var delivery = {
       manifest: "Insulin",
       pickup_name: "Pharmacy",
