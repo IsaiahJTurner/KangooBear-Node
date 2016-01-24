@@ -46,6 +46,12 @@ app.post("/api/patients/:patientId", function(req, res) {
   Patient.findOne({
     _id: req.params.patientId
   }, function(err, patient) {
+        if (err || !patient) {
+      return res.json({
+        err: err,
+        patient: patient
+      })
+    }
     var delivery = {
       manifest: "Insulin",
       pickup_name: "Pharmacy",
@@ -56,7 +62,6 @@ app.post("/api/patients/:patientId", function(req, res) {
       dropoff_phone_number: patient.phone,
       quote_id: patient.quote
     };
-console.log(patient)
     postmates.new(delivery, function(postmatesErr, postmatesRes) {
       res.json({
         err: err,
