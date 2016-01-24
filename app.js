@@ -51,7 +51,7 @@ app.get("/api/patients/:patientId", function(req, res) {
 });
 
 app.post("/api/patients", function(req, res) {
-  Patient.update(req.body.modelData, {
+  Patient.findOneAndUpdate(req.body.modelData, {
     accessToken: req.body.modelData.accessToken
   }, {
     upsert: true,
