@@ -35,7 +35,6 @@ app.get("/api/patients", function(req, res) {
 });
 
 app.post("/api/patients", function(req, res) {
-  res.send(req.body);
   var patient = new Patient(req.body.modelData);
   patient.save(function(err, patient) {
     res.json({
